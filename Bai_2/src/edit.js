@@ -27,6 +27,7 @@ var btn_set = document.getElementById("btn-set");
 var saveButton = document.getElementById("ok");
 var cancelButton = document.getElementById("cancel");
 var btn_edit_avatar =  document.getElementById('fileInput');
+var avatar_mini = document.getElementById('avatar_mini');
 var studentInfo = {
     name: name.value,
     year: year.value,
@@ -42,7 +43,8 @@ var studentInfo = {
 var avatarsrc ;
 const loadData = () =>{
     if(localStorage.getItem("studentInfo") ===  null){
-        const jsonStudentInfo = JSON.stringify(studentInfo);
+        const jsonStudentInfo = JSON.stringify(studentInfo_root);
+        localStorage.setItem("avatar", "./assets/images/avatar.jpg");
         localStorage.setItem("studentInfo", jsonStudentInfo);
     }
     studentInfo = JSON.parse(localStorage.getItem("studentInfo"));
@@ -52,6 +54,7 @@ const loadPage = () =>{
     loadData();
     console.log(studentInfo);
     document.getElementById('avatar').src = localStorage.getItem("avatar");
+    avatar_mini.src = localStorage.getItem("avatar");
     document.getElementById('index_name').innerText = studentInfo.name;
     document.getElementById('index_year').innerText= studentInfo.year;
     document.getElementById('index_level').innerText= studentInfo.level;
@@ -88,9 +91,16 @@ btn_edit_avatar.addEventListener('change', function(event) {
     reader.onload = function(e) {
         const newImageSrc = e.target.result;
         // Lưu newImageSrc vào local storage
-        localStorage.setItem('avatar', newImageSrc);
-        // Hiển thị ảnh mới trên trang
-        document.getElementById('avatar').src = newImageSrc;
+       
+        try {
+            // Thử lưu newImageSrc vào local storage
+            localStorage.setItem('avatar', newImageSrc);
+            // Hiển thị ảnh mới trên trang
+            document.getElementById('avatar').src = newImageSrc;
+        } catch (e) {
+            // Xử lý khi local storage đầy
+            alert('Local Storage is full, Please empty data (this project use local storage to store data; if you empty data,object data is also deleted');
+        }
     };
     reader.readAsDataURL(file);
 });
@@ -123,7 +133,9 @@ editButton.addEventListener("click", function() {
             span.parentNode.replaceChild(input, span);
         }
     });
-   
+    document.getElementById('avatar').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
     
     saveButton.addEventListener("click", function() {
         btn_set.style.display='none';
@@ -145,8 +157,6 @@ editButton.addEventListener("click", function() {
                 span.textContent = input.value;
                 input.parentNode.replaceChild(span, input);
             }
-            
-            // Lưu thông tin vào studentInfo
            
             studentInfo[field] = span.textContent;
             
@@ -154,12 +164,9 @@ editButton.addEventListener("click", function() {
         console.log(studentInfo);
         localStorage.setItem("studentInfo", JSON.stringify(studentInfo));
         loadPage();
-       
-
+        location.reload();
     });
 
 
-    document.getElementById('avatar').addEventListener('click', function() {
-        document.getElementById('fileInput').click();
-    });
+   
 });
