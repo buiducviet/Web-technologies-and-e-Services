@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://kit.fontawesome.com/9fd013f933.js" crossorigin="anonymous"></script>
+    
+  <!-- CSS Libraries -->
+  <link href="/front/assets/js/tabulator-master/dist/css/tabulator.min.css" rel="stylesheet">
+  <link href="/front/assets/js/tabulator-master/dist/css/bootstrap/tabulator_bootstrap4.min.css"
+    rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Thông tin sinh viên</title>
+</head>
+<body>
+    <div class="side-bar">
+        <div class="content-sibe-bar">
+            <div class="content-main">
+
+                <h3>
+                    <img src="/src/avatar.jpg" alt="" style="width: 30px;height: 30px; border-radius: 50%;">
+                     Bùi Đức Việt
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span style="display: flex;">Thư báo<span class="badge" style="background-color:#9C1010;">0</span></span>
+                        
+                    </li>
+                    <li>
+                        <span>Đổi mật khẩu</span>
+                    </li>
+                    <li>
+                        <span>Cấp lại mật khẩu Email trường</span>
+                    </li>
+                    <li>
+                        <span>Thoát đăng nhập</span>
+                    </li>
+                    <li>
+                        <span>Thông tin mật khẩu Email cấp mới</span>
+                    </li>
+                    <li>
+                        <span>Xác nhận khai báo y tế</span>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Quản lý hồ sơ sinh viên
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Thông tin sinh viên</span>
+                    </li>
+                    <li>
+                        <span>Cập nhật thông tin cá nhân</span>
+                    </li>
+                    <li>
+                        <span>Thông tin lớp sinh viên</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Đào tạo
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Chương trình đào tạo</span>
+                    </li>
+                    <li>
+                        <span>Kế hoạch học tập</span>
+                    </li>
+                    <li>
+                        <span>Kết quả học tập</span>
+                    </li>
+                    <li>
+                        <span>Đồ án - Tốt nghiệp</span>
+                    </li>
+                    <li>
+                        <span>Thời khóa biểu tạm thời</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Tư vấn trực tuyến
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Hỏi đáp - Tư vấn trực tuyến</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Tài chính học vụ
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Thông tin công nợ học phí</span>
+                    </li>
+                    <li>
+                        <span>Thanh toán học phí trực tuyến</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Dịch vụ hành chính
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>ĐK cấp giấy tờ</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+    <div class="main-content-title">
+        <h3>Thông tin cá nhân</h3>
+        <hr>
+    </div>
+    <div class="main-content">
+        <div class="row head">
+            <div style="display: flex;">
+                <span class="title">Thông tin sinh viên</span>
+                <a  target="_blank" href="/pages/edit_infor.html" style="margin-left: 10px;"><i class="fa-solid fa-pen-to-square" style="color: #333;"></i></a>
+            </div>
+           
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="avatar center ">
+                    <img class="img-thumbnail" src="/src/avatar.jpg" alt="" style="width: 200px;">
+                </div>
+                <div class="center" style="padding: 10px 0px;">
+                    <strong class="id">
+                        MSSV:
+                    </strong>20215513
+                </div>
+            </div>
+            <div class="col-md-4">
+                <span class="normalText " id="infor">
+                    <span>Họ và tên : </span><strong  id="index_name">Bùi Đức Việt</strong>
+                    <br>
+                    <span>Năm vào trường : </span><strong id="index_year">2021</strong><br>
+                    <span>Bậc đào tạo : </span><strong id="index_level">Đại học đại trà</strong><br>
+                    <span>Chương trình : </span><strong id="index_major">Khoa học Máy tính 2021</strong><br>
+                    <span>Khoa/Viện quản lý : </span><strong id="index_department">Trường Công nghệ thông tin và Truyền thông</strong><br>
+                    <span>Tình trạng học tập : </span><strong id="index_status">Học</strong><br>
+                </span>
+            </div>
+            <div class="col-md-4">
+                <span class="normalText" id="infor">
+                    <span>Giới tính : </span><strong id="index_gender">Nam</strong><br>
+                    <span>Lớp : </span><strong id="index_class">Khoa học máy tính 04-K66</strong><br>
+                    <span>Khóa học : </span><strong id="index_course">66</strong><br>
+                    <span>Email : </span><strong id="index_email">viet.bd215513@sis.hust.edu.vn</strong><br>
+                </span>
+            </div>
+        </div>
+        <div class="row head">
+            <span class="title">Thông tin học tập</span>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="normalText" id="">
+                    <span>Tổng kết học kỳ : </span><strong>20231</strong><br>
+                    <span>Trung bình tích lũy : </span><strong>1.57</strong><br>
+                    <span>Số TC nợ đăng ký : </span><strong>0</strong><br></span>
+            </div>
+            <div class="col-md-6">
+                <span class="normalText" id="">
+                    <span>Số TC tích lũy : </span><strong>85</strong><br>
+                    <span>Trình độ sinh viên : </span><strong>3</strong><br>
+                    <span>Mức cảnh báo : </span><strong>M0</strong><br></span>
+            </div>
+        </div>
+        <div class="row head">
+            <span class="title">Thông tin cá nhân</span>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="normalText" id="">
+                    <span>Dân tộc : </span><strong>KINH</strong><br>
+                    <span>Năm TN cấp 3 : </span><strong>2021</strong><br>
+                    <span>Địa chỉ : </span><strong> XÃ VĂN HỘI, HUYỆN NINH GIANG, TỈNH HẢI DƯƠNG</strong><br>
+                    <span>Số CMTND : </span><strong>0*******</strong><br>
+                    <span>Nơi cấp : </span><strong>HẢI DƯƠNG</strong><br>
+                    <span>Họ tên bố : </span><strong>BÙI ĐỨC HẢI</strong><br>
+                    <span>Năm sinh : </span><strong>1971</strong><br>
+                    <span>Nghề nghiệp : </span><strong>NÔNG DÂN</strong><br>
+                    <span>Điện thoại : </span><strong>0*******</strong><br>
+                    <span>Email : </span><strong>KHÔNG CÓ</strong><br></span>
+            </div>
+            <div class="col-md-6">
+                <span class="normalText" id="">
+                    <span>Tôn giáo : </span><strong>KHÔNG</strong><br>
+                    <span>Trường THPT : </span><strong>QUANG TRUNG - HẢI DƯƠNG</strong><br>
+                    <span>Hộ khẩu : </span><strong> XÃ VĂN HỘI, HUYỆN NINH GIANG, TỈNH HẢI DƯƠNG</strong><br>
+                    <span>Số Điện thoại : </span><strong>0*******</strong><br>
+                    <span>Họ tên mẹ : </span><strong>HÀ THỊ CHÍN</strong><br>
+                    <span>Năm sinh : </span><strong>1974</strong><br>
+                    <span>Nghề nghiệp : </span><strong>CÔNG NHÂN</strong><br>
+                    <span>Điện thoại : </span><strong>037***28</strong><br>
+                    <span>Email : </span><strong>KHÔNG CÓ</strong><br></span>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <span><strong>Ghi chú:</strong></span>
+            <span>Nếu sinh viên thấy thông tin của mình chưa chính xác, xin vui lòng liên hệ phòng Đào tạo để cập nhật lại.</span>
+        </div>
+    </div>
+    </div>
+    <script src="/js/source.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://kit.fontawesome.com/9fd013f933.js" crossorigin="anonymous"></script>
+ 
+  <!-- CSS Libraries -->
+  <link href="/front/assets/js/tabulator-master/dist/css/tabulator.min.css" rel="stylesheet">
+  <link href="/front/assets/js/tabulator-master/dist/css/bootstrap/tabulator_bootstrap4.min.css"
+    rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Chỉnh sửa thông tin sinh viên</title>
+</head>
+<body>
+    <div class="side-bar">
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                    <img src="/src/avatar.jpg" alt="" style="width: 30px;height: 30px; border-radius: 50%;">
+
+                     Bùi Đức Việt
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span style="display: flex;">Thư báo<span class="badge" style="background-color:#9C1010;">0</span></span>
+
+                    </li>
+                    <li>
+                        <span>Đổi mật khẩu</span>
+                    </li>
+                    <li>
+                        <span>Cấp lại mật khẩu Email trường</span>
+                    </li>
+                    <li>
+                        <span>Thoát đăng nhập</span>
+                    </li>
+                    <li>
+                        <span>Thông tin mật khẩu Email cấp mới</span>
+                    </li>
+                    <li>
+                        <span>Xác nhận khai báo y tế</span>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Quản lý hồ sơ sinh viên
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Thông tin sinh viên</span>
+                    </li>
+                    <li>
+                        <span>Cập nhật thông tin cá nhân</span>
+                    </li>
+                    <li>
+                        <span>Thông tin lớp sinh viên</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Đào tạo
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Chương trình đào tạo</span>
+                    </li>
+                    <li>
+                        <span>Kế hoạch học tập</span>
+                    </li>
+                    <li>
+                        <span>Kết quả học tập</span>
+                    </li>
+                    <li>
+                        <span>Đồ án - Tốt nghiệp</span>
+                    </li>
+                    <li>
+                        <span>Thời khóa biểu tạm thời</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Tư vấn trực tuyến
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Hỏi đáp - Tư vấn trực tuyến</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Tài chính học vụ
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Thông tin công nợ học phí</span>
+                    </li>
+                    <li>
+                        <span>Thanh toán học phí trực tuyến</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Dịch vụ hành chính
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>ĐK cấp giấy tờ</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+    <div class="main-content-title">
+        <h3>Thông tin cá nhân</h3>
+        <hr>
+    </div>
+    <div class="main-content">
+        <div class="row head">
+            <div style="display: flex;">
+                <span class="title">Thông tin sinh viên</span>
+            </div>
+           
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="avatar center ">
+                    <img class="img-thumbnail" src="/src/avatar.jpg" alt="" style="width: 200px;">
+                </div>
+                <div class="center" style="padding: 10px 0px;">
+                    <strong class="id">
+                        MSSV:
+                    </strong>20215513
+                </div>
+            </div>
+            <div class="col-md-3">
+                <span class="normalText " id="infor">
+                    <span>Họ và tên : </span><input id="edit_name" type="text"></input>
+                    <br>
+                    <br>
+                    <span>Năm vào trường : </span><input id="edit_year" type="text"></input>
+                    <br>
+                    <br>
+                    <span>Bậc đào tạo : </span><select id="edit_level">
+                        <option value="Đại học đại trà">Đại học đại trà</option>
+                        <option value="Chương trình tiên tiến">Chương trình tiên tiến</option>
+                    </select><br><br>
+                    <span>Chương trình : </span><input id="edit_major" type="text"></input><br><br>
+                    <span>Khoa/Viện quản lý : </span><select id="edit_department">
+                        <option value="Trường Cơ khí">Trường Cơ khí</option>
+                        <option value="Trường Công nghệ thông tin và Truyền thông">Trường Công nghệ Thông tin và Truyền thông</option>
+                        <option value="Trường Điện - Điện tử">Trường Điện - Điện tử</option>
+                        <option value="Trường Hoá và Khoa học sự sống">Trường Hoá và Khoa học sự sống</option>
+                        <option value="Trường Vật liệu">Trường Vật liệu</option>
+
+                    </select><br><br>
+                    <span>Tình trạng học tập : </span>
+                    <select name="edit_status" id="edit_status">
+                        <option value="Học">Học</option>
+                        <option value="Tốt nghiệp">Tốt nghiệp</option>
+                        <option value="Thôi học">Thôi học</option>
+                        <option value="Bảo lưu">Bảo lưu</option>
+                    </select>
+                    <br><br>
+                </span>
+            </div>
+            <div class="col-md-5">
+                <span class="normalText" id="infor">
+                    <span>Giới tính : </span>
+                    <input id="Nam" name="gender" type="radio" value="Nam" >Nam</input>
+                    <input id="Nữ" name="gender" type="radio" value="Nữ" style="margin-left: 20px;">Nữ</input>
+                    <br><br>
+                    <span>Lớp : </span><input id="edit_class" type="text"></input><br><br>
+                    <span>Khóa học : </span><input id="edit_course" type="number"></input><br><br>
+                    <span>Email : </span><input id="edit_email" type="email"></input><br><br>
+                </span>
+            </div>
+        </div>
+        <div class="row" style="text-align: center; text-align: center;
+        display: flex;
+        justify-self: center;
+        align-content: space-around;
+        justify-content: space-evenly;">
+            <button class="ok" id="ok">OK</button>
+            <button class="cancel" id="cancel">CANCEL</button>
+        </div>
+
+        <div class="modal"  id="myModal">
+            <div class="modal_content">
+            <p>Bạn muốn lưu thay đổi?</p>
+            <button id="save">Save</button>
+            <button id="cancel_modal">Cancel</button>
+        </div>
+        </div>
+        <script >
+            window.onload = function() {
+            var inputElement = document.getElementById('edit_name');
+            inputElement.focus();
+            };
+        </script>
+        <script src="/js/edit.js"></script>
+</body>
+</html>
