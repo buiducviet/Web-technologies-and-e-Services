@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+ 
+  <script src="https://kit.fontawesome.com/9fd013f933.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    
+  <!-- CSS Libraries -->
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Thông tin sinh viên</title>
+</head>
+<body >
+    <div class="side-bar">
+        <div class="content-sibe-bar">
+            <div class="content-main">
+
+                <h3>
+                    <img id="avatar_mini"  src="./assets/images/avatar.jpg" alt="" style="width: 30px;height: 30px; border-radius: 50%;">
+                    
+                     Bùi Đức Việt
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span style="display: flex;">Thư báo<span class="badge" style="background-color:#9C1010;">0</span></span>
+                        
+                    </li>
+                    <li>
+                        <span>Đổi mật khẩu</span>
+                    </li>
+                    <li>
+                        <span>Cấp lại mật khẩu Email trường</span>
+                    </li>
+                    <li>
+                        <span>Thoát đăng nhập</span>
+                    </li>
+                    <li>
+                        <span>Thông tin mật khẩu Email cấp mới</span>
+                    </li>
+                    <li>
+                        <span>Xác nhận khai báo y tế</span>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Quản lý hồ sơ sinh viên
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Thông tin sinh viên</span>
+                    </li>
+                    <li>
+                        <span>Cập nhật thông tin cá nhân</span>
+                    </li>
+                    <li>
+                        <span>Thông tin lớp sinh viên</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Đào tạo
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Chương trình đào tạo</span>
+                    </li>
+                    <li>
+                        <span>Kế hoạch học tập</span>
+                    </li>
+                    <li>
+                        <span>Kết quả học tập</span>
+                    </li>
+                    <li>
+                        <span>Đồ án - Tốt nghiệp</span>
+                    </li>
+                    <li>
+                        <span>Thời khóa biểu tạm thời</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Tư vấn trực tuyến
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Hỏi đáp - Tư vấn trực tuyến</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Tài chính học vụ
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>Thông tin công nợ học phí</span>
+                    </li>
+                    <li>
+                        <span>Thanh toán học phí trực tuyến</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="content-sibe-bar">
+            <div class="content-main">
+                <h3>
+                     Dịch vụ hành chính
+                </h3>
+                <ul class="sitemap">
+                    <li>
+                        <span>ĐK cấp giấy tờ</span>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+    <div class="main-content-title">
+        <h3>Thông tin cá nhân</h3>
+        <hr>
+    </div>
+    <div class="main-content">
+        <div class="group" id="group">
+            <div class="row head">
+               
+                <div style="display: flex;">
+
+                    <span class="title">Thông tin sinh viên_20215513</span>
+                    <div style="float: right; margin-left: 30px" id="btn-set">
+                        <button id="add-infor" style="background-color: rgb(3, 241, 23);">Add infor item</button>
+                        <button id="add-group" style="background-color: rgb(1, 70, 173);">Add group item</button>
+                        
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="row-body">
+               
+            </div>
+        </div>
+        <div class="modal" id="modal">
+            <span class="normalText " id="infor">
+                <span>Họ và tên : </span><span class="infor_student"  id="index_name">Bùi Đức Việt</span>
+                <br>
+                <span>MSSV : </span><span class="infor_student" id="index_year">20215513</span><br>
+                
+            </span>
+
+            <br>
+            <br>
+            <span>Bạn có muốn xóa mục này ?</span>
+            <br>
+            <button id="save">OK</button>
+            <button id="cancel_modal">Cancel</button>
+        </div>
+        <div class="modal_add_item" id="modal_add_item">
+            
+            <span>Bạn có muốn input kiểu nào?</span>
+            <br>
+           <select name="" id="input_type">
+                <option value="text">text</option>
+                <option value="list">list</option>
+                <option value="checkbox">checkbox</option>
+                <option value="radio">radio</option>
+           </select>
+           <br>
+           <div id="additional_options"></div>
+           <br>
+           <button id="ok">OK</button>
+           <button id="cancel">Cancel</button>
+        </div>
+
+    </div>
+    <button id="printBtn">In ra PDF</button>
+    </div>
+    <div id="overlay"></div>
+    <script src="./src/src.js"></script>
+    <script>
+
+        function getClippedRegion(image, x, y, width, height) {
+            var canvas = document.createElement("canvas"),
+            ctx = canvas.getContext("2d");
+        
+            canvas.width = width;
+            canvas.height = height;
+        
+            ctx.drawImage(image, x, y, width, height, 0, 0, width, height);
+        
+            return {
+                image: canvas.toDataURL(),
+                width: 500
+            };
+        }
+        
+        $("body").on("click", "#printBtn", function () {
+        
+            html2canvas($(".main")[0], {
+            onrendered: function (canvas) {
+            let splitAt = 775; 
+        
+                let images = [];
+                let y = 0;
+                while (canvas.height > y) {
+                    images.push(getClippedRegion(canvas, 0, y, canvas.width, splitAt));
+                    y += splitAt;
+                }
+        
+                // PDF creation using pdfMake
+                var docDefinition = {
+                    content: images,
+                    pageSize: "LETTER"
+                };
+                pdfMake.createPdf(docDefinition).download("report.pdf");
+            }
+            });
+        });
+        
+    </script>
+</body>
+</html>
