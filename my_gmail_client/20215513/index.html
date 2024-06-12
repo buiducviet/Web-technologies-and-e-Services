@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
+    <link rel="stylesheet" href="/20215513/style.css">
+    <title>Simple Gmail Client</title>
+    <style>
+        #compose, #inbox, #accountInfo {
+            display: none;
+            margin-top: 20px;
+        }
+        #emails div {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        var CLIENT_ID = "272912271899-h12ar4orjm9d9jv092eb6ivmkic3pm7q.apps.googleusercontent.com";
+        var API_KEY = "AIzaSyDRetqgBsCsAdNwm3hrMy8_J_HE9FFoqVY";
+        var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send';
+
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                plugin_name: 'GmailClient',
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
+                scope: SCOPES
+            }).then(function () {
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            });
+        }
+
+        function handleLogin() {
+            gapi.auth2.getAuthInstance().signIn().then(function() {
+                updateSigninStatus(true);
+            }, function(error) {
+                console.error('Error signing in:', error);
+            });
+        }
+
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                var user = gapi.auth2.getAuthInstance().currentUser.get();
+                var profile = user.getBasicProfile();
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('accountInfo').style.display = 'block';
+                document.getElementById('compose').style.display = 'block';
+                document.getElementById('inbox').style.display = 'block';
+                document.getElementById('sent').style.display = 'block';
+                document.getElementById('userEmail').textContent = profile.getEmail();
+                listMessages('inbox');
+                listMessages('sent');
+
+            } else {
+                document.getElementById('login').style.display = 'block';
+                document.getElementById('accountInfo').style.display = 'none';
+                document.getElementById('compose').style.display = 'none';
+                document.getElementById('inbox').style.display = 'none';
+                document.getElementById('sent').style.display = 'none';
+                document.getElementById('emailDetails').innerHTML ='';
+            }
+        }
+        function listMessages(label) {
+            let labelId = label === 'inbox' ? 'INBOX' : 'SENT';
+            gapi.client.gmail.users.messages.list({
+                'userId': 'me',
+                'labelIds': [labelId],
+                'maxResults': 10
+            }).then(function(response) {
+                var messages = response.result.messages;
+                if (messages && messages.length > 0) {
+                    for (var i = 0; i < messages.length; i++) {
+                        var message = messages[i];
+                        getMessage(message.id, label);
+                    }
+                } else {
+                    console.log('No messages found.');
+                }
+            });
+        }
+        
+        function getMessage(messageId, label) {
+            gapi.client.gmail.users.messages.get({
+                'userId': 'me',
+                'id': messageId
+            }).then(function(response) {
+                var headers = response.result.payload.headers;
+                var from = headers.find(header => header.name === 'From')?.value || 'Unknown sender';
+                var to = headers.find(header => header.name === 'To')?.value || 'Unknown recipient';
+                var subject = headers.find(header => header.name === 'Subject')?.value || '(no subject)';
+        
+                var displayName = label === 'inbox' ? from : to;
+                var emailContent = document.createElement('div');
+                emailContent.textContent = displayName + ' - ' + subject;
+                emailContent.className = 'email-item';
+                emailContent.onclick = function() {
+                    showEmailDetails(response.result);
+                };
+                if (label === 'inbox') {
+                    document.getElementById('emails').appendChild(emailContent);
+                } else {
+                    document.getElementById('sentEmails').appendChild(emailContent);
+                }
+            });
+        }
+        
+        function showEmailDetails(email) {
+            var emailDetails = document.getElementById('emailDetails');
+            var headers = email.payload.headers;
+            var subject = headers.find(header => header.name === 'Subject')?.value || '(no subject)';
+            var from = headers.find(header => header.name === 'From')?.value || 'Unknown sender';
+            var to = headers.find(header => header.name === 'To')?.value || 'Unknown recipient';
+            var date = headers.find(header => header.name === 'Date')?.value || 'Unknown date';
+        
+            emailDetails.innerHTML = `
+                <h2>${subject}</h2>
+                <p><strong>From:</strong> ${from}</p>
+                <p><strong>To:</strong> ${to}</p>
+                <p><strong>Date:</strong> ${date}</p>
+                <div>${getBody(email.payload)}</div>
+            `;
+            emailDetails.style.display = 'block';
+        }
+        
+        
+        function getBody(payload) {
+            var encodedBody = '';
+            if (!payload.parts) {
+                encodedBody = payload.body.data;
+            } else {
+                encodedBody = getHTMLPart(payload.parts) || getPlainTextPart(payload.parts);
+            }
+            encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/');
+            return decodeURIComponent(escape(window.atob(encodedBody)));
+        }
+        
+        function getHTMLPart(parts) {
+            for (var i = 0; i < parts.length; i++) {
+                if (parts[i].mimeType === 'text/html') {
+                    return parts[i].body.data;
+                } else if (parts[i].parts) {
+                    var part = getHTMLPart(parts[i].parts);
+                    if (part) return part;
+                }
+            }
+            return '';
+        }
+        
+        function getPlainTextPart(parts) {
+            for (var i = 0; i < parts.length; i++) {
+                if (parts[i].mimeType === 'text/plain') {
+                    return parts[i].body.data;
+                } else if (parts[i].parts) {
+                    var part = getPlainTextPart(parts[i].parts);
+                    if (part) return part;
+                }
+            }
+            return '';
+        }
+        
+        
+        
+        function sendEmail() {
+            var email = '';
+            var to = document.getElementById('to').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value; // Nội dung không cần mã hóa
+            var boundary = 'foo_bar_baz';
+        
+            email += 'To: ' + to + '\r\n';
+            email += 'Subject: =?UTF-8?B?' + btoa(unescape(encodeURIComponent(subject))) + '?=\r\n'; // Mã hóa chủ đề sang Base64
+            email += 'Content-Type: multipart/mixed; boundary="' + boundary + '"\r\n\r\n';
+            email += '--' + boundary + '\r\n';
+            email += 'Content-Type: text/plain; charset=UTF-8\r\n\r\n';
+            email += unescape(encodeURIComponent(message)) + '\r\n\r\n'; // Mã hóa nội dung sang UTF-8 và giải mã
+        
+            var fileInput = document.getElementById('attachment');
+            var file = fileInput.files[0];
+        
+            if (file) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    var fileContent = reader.result.split(',')[1];
+                    email += '--' + boundary + '\r\n';
+                    email += 'Content-Type: application/octet-stream; name="' + file.name + '"\r\n';
+                    email += 'Content-Transfer-Encoding: base64\r\n';
+                    email += 'Content-Disposition: attachment; filename="' + file.name + '"\r\n\r\n';
+                    email += fileContent + '\r\n\r\n';
+                    email += '--' + boundary + '--';
+        
+                    sendGmailEmail(email);
+                };
+                reader.onerror = function (error) {
+                    console.error('Error reading file:', error);
+                };
+            } else {
+                email += '--' + boundary + '--';
+                sendGmailEmail(email);
+            }
+        }
+        
+        function sendGmailEmail(email) {
+            var encodedEmail = btoa(email).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+            gapi.client.gmail.users.messages.send({
+                'userId': 'me',
+                'resource': {
+                    'raw': encodedEmail
+                }
+            }).then(function(response) {
+                console.log('Email sent:', response);
+                document.getElementById('to').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+                document.getElementById('attachment').value = '';
+                alert("Email sent successfully");
+            });
+        }
+        
+        
+        
+        function handleSignOut() {
+            gapi.auth2.getAuthInstance().signOut().then(function() {
+                updateSigninStatus(false);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            handleClientLoad();
+        });
+    </script>
+</head>
+<body>
+    <button id="login" onclick="handleLogin()">Login</button>
+    <div id="accountInfo">
+        <p>Welcome, <span id="userEmail"></span>!</p>
+        <button onclick="handleSignOut()">Logout</button>
+    </div>
+    <div id="inbox">
+        <h2>Inbox</h2>
+        <div id="emails"></div>
+    </div>
+    <div id="sent">
+        <h2>Sent</h2>
+        <div id="sentEmails"></div>
+    </div>
+    <div id="emailDetails" style="display:none;">
+        <h2>Email Details</h2>
+    </div>
+    <div id="compose">
+        <h2>Compose Email</h2>
+        <form onsubmit="sendEmail(); return false;">
+            <input type="email" id="to" placeholder="Recipient Email" required>
+            <input type="text" id="subject" placeholder="Subject">
+            <textarea id="message" placeholder="Message" required></textarea>
+            <input type="file" id="attachment">
+            <button type="submit">Send Email</button>
+        </form>
+        
+    </div>
+</body>
+</html>

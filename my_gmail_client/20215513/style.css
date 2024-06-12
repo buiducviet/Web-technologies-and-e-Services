@@ -1,0 +1,98 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: left;
+    color: #000;
+}
+
+.sidebar button:hover {
+    background-color: #ddd;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+#login, #accountInfo, #compose, #inbox, #emailDetails, #sent {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+.email-item:hover {
+    cursor: pointer;
+    background-color: #ccc;
+}
+button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #357ae8;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="file"] {
+    padding: 3px;
+}
+
+#accountInfo p {
+    font-size: 18px;
+}
+
+#emails div, #sentEmails div {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#emails div:last-child {
+    border-bottom: none;
+}
+#sentEmails div:last-child {
+    border-bottom: none;
+}
